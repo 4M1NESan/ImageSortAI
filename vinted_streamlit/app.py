@@ -73,7 +73,7 @@ if not os.path.exists("model"):
     os.makedirs("model")
 
 # Télécharger le modèle s'il n'est pas déjà présent
-download_model(model_url, model_path)
+download_model(model_path, model_url)
 
 # Chargement du modèle
 model = load_custom_model(model_path)
