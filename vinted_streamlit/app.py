@@ -7,6 +7,7 @@ import numpy as np
 import cv2
 import os
 import sys
+import gdown
 
 # Configuration de l'encodage
 sys.stdout.reconfigure(encoding='utf-8')
@@ -17,6 +18,16 @@ LABELS = {
     1: "Pantalon & Short", 
     2: "Haut"
 }
+
+# Fonction pour télécharger le modèle depuis Google Drive
+def download_model(model_url = 'https://drive.google.com/uc?id=17-s9lmrPNuVAdcNJEAJrH4QEq16K_PiC', model_path):
+    # Vérifie si le modèle existe déjà
+    if not os.path.exists(model_path):
+        st.write("Téléchargement du modèle depuis Google Drive...")
+        gdown.download(model_url, model_path, quiet=False)
+        st.success(f"Modèle téléchargé avec succès dans '{model_path}'")
+    else:
+        st.success(f"Le modèle est déjà présent dans '{model_path}'")
 
 # Fonction pour charger le modèle
 def load_custom_model(model_path):
@@ -53,8 +64,18 @@ def load_custom_model(model_path):
 # Interface Streamlit
 st.title("🔍 Classificateur Vinted - CY Tech")
 
-# Chargement du modèle
+# URL de Google Drive où ton modèle est hébergé
+model_url = 'https://drive.google.com/uc?id=TON_ID_FICHIER'  # Remplace par ton ID Google Drive
 model_path = "model/vinted_cnn_model.h5"
+
+# Vérifier si le dossier "model" existe, sinon le créer
+if not os.path.exists("model"):
+    os.makedirs("model")
+
+# Télécharger le modèle s'il n'est pas déjà présent
+download_model(model_url, model_path)
+
+# Chargement du modèle
 model = load_custom_model(model_path)
 
 if model is not None:
@@ -72,7 +93,6 @@ if model is not None:
             img = cv2.resize(img, (128, 128))  # Redimensionner (adaptez à la taille attendue par votre modèle)
             img = img.reshape(1, 128, 128, 1)  # Ajouter les dimensions batch et canal
             img = img.astype('float32') / 255.0  # Normalisation
-
 
             # Prédiction
             pred = model.predict(img)
