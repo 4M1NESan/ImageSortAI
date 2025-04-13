@@ -96,7 +96,7 @@ def train_model(model, X_train, y_train, X_val, y_val, epochs=30, batch_size=32)
     return history
 
 # ==============================================
-# PARTIE 3 : ENTRAINEMENT DU MODELE
+# PARTIE 4 : EVALUATION
 # ==============================================
 def evaluate_model(model, X_test, y_test, label_map):
     # Évalue le modèle sur le test set
@@ -150,7 +150,7 @@ def plot_history(history):
     plt.show()
 
 # ==============================================
-# PARTIE 4 : FONCTION PRINCIPALE
+# PARTIE 5 : FONCTION PRINCIPALE
 # ==============================================
 def main():
     # 1. Charger les données
@@ -182,4 +182,4 @@ def main():
     print("\nModèle final sauvegardé dans 'vinted_cnn_model.h5'")
 
 
-    main()
+main()
