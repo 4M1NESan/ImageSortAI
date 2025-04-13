@@ -61,7 +61,7 @@ def load_custom_model(model_path):
         return None
 
 # Interface Streamlit
-st.title("🔍 Classificateur Vinted - CY Tech")
+st.title("🔍 Classificateur Vinted - INPT")
 
 # URL de Google Drive où ton modèle est hébergé
 model_url = 'https://drive.google.com/uc?id=17-s9lmrPNuVAdcNJEAJrH4QEq16K_PiC'
