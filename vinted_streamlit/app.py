@@ -20,7 +20,7 @@ LABELS = {
 }
 
 # Fonction pour télécharger le modèle depuis Google Drive
-def download_model(model_url = 'https://drive.google.com/uc?id=17-s9lmrPNuVAdcNJEAJrH4QEq16K_PiC', model_path):
+def download_model(model_path, model_url = 'https://drive.google.com/uc?id=17-s9lmrPNuVAdcNJEAJrH4QEq16K_PiC'):
     # Vérifie si le modèle existe déjà
     if not os.path.exists(model_path):
         st.write("Téléchargement du modèle depuis Google Drive...")
