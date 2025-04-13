@@ -4,7 +4,6 @@ from tensorflow.keras.layers import InputLayer
 from tensorflow.keras.preprocessing.image import img_to_array
 from PIL import Image
 import numpy as np
-import cv2
 import os
 import sys
 import gdown
@@ -65,7 +64,7 @@ def load_custom_model(model_path):
 st.title("🔍 Classificateur Vinted - CY Tech")
 
 # URL de Google Drive où ton modèle est hébergé
-model_url = 'https://drive.google.com/uc?id=TON_ID_FICHIER'  # Remplace par ton ID Google Drive
+model_url = 'https://drive.google.com/uc?id=17-s9lmrPNuVAdcNJEAJrH4QEq16K_PiC'
 model_path = "model/vinted_cnn_model.h5"
 
 # Vérifier si le dossier "model" existe, sinon le créer
@@ -90,7 +89,9 @@ if model is not None:
             # Prétraitement en niveaux de gris
             img = Image.open(uploaded_file).convert("L")  # Convertir en niveaux de gris
             img = np.array(img)  # Convertir en tableau numpy
-            img = cv2.resize(img, (128, 128))  # Redimensionner (adaptez à la taille attendue par votre modèle)
+            img = Image.fromarray(img).resize((128, 128))  # Redimensionner avec Pillow
+            img = np.array(img)  # Reconvertir en array après resize
+
             img = img.reshape(1, 128, 128, 1)  # Ajouter les dimensions batch et canal
             img = img.astype('float32') / 255.0  # Normalisation
 
